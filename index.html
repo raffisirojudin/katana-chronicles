@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KatanaChronicles — Antara Sejarah & Legenda</title>
+<meta name="description" content="Ensiklopedia interaktif Katana: sejarah samurai Jepang, anatomi pedang, dan katana legendaris dunia anime.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --obsidian: #0A0A0F;
+    --surface: #111118;
+    --card: #16161F;
+    --maroon: #8B1A1A;
+    --maroon-bright: #B22222;
+    --gold: #C8A84B;
+    --gold-dim: #8A6F2A;
+    --ivory: #E8E0D0;
+    --muted: #7A7A8A;
+    --border: rgba(200,168,75,0.15);
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-jp: 'Noto Serif JP', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--ivory);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--obsidian); }
+  ::-webkit-scrollbar-thumb { background: var(--maroon); border-radius: 2px; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--maroon-bright); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a, .nav-links span {
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links span:hover { color: var(--gold); }
+  .nav-search {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    color: var(--ivory);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    outline: none;
+    width: 180px;
+    transition: border-color 0.2s;
+  }
+  .nav-search:focus { border-color: var(--gold); }
+  .nav-search::placeholder { color: var(--muted); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--gold); display: block; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,26,26,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 80% at 80% 80%, rgba(200,168,75,0.05) 0%, transparent 60%);
+  }
+
+  /* SIGNATURE: sabetan katana diagonal */
+  .slash {
+    position: absolute;
+    width: 0; height: 120vh;
+    border-right: 1px solid rgba(200,168,75,0.35);
+    top: -10vh; left: 50%;
+    transform: rotate(-15deg) translateX(-50%);
+    transform-origin: top center;
+    animation: slashReveal 1.2s ease-out 0.3s forwards;
+    opacity: 0;
+  }
+  .slash::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 100%;
+    border-right: 1px solid rgba(139,26,26,0.5);
+    right: -3px; top: 0;
+  }
+  @keyframes slashReveal {
+    from { clip-path: inset(100% 0 0 0); opacity: 1; }
+    to   { clip-path: inset(0% 0 0 0); opacity: 1; }
+  }
+
+  .hero-jp {
+    font-family: var(--font-jp);
+    font-size: clamp(4rem, 12vw, 9rem);
+    color: rgba(200,168,75,0.06);
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 780px; }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 0.6s forwards;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    color: var(--ivory);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 0.8s forwards;
+  }
+  .hero-title .accent { color: var(--gold); }
+  .hero-title .slash-word {
+    position: relative;
+    display: inline-block;
+    color: var(--maroon-bright);
+  }
+  .hero-desc {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 1s forwards;
+  }
+
+  /* Dual CTA */
+  .hero-cta {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 1.2s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.8rem;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--maroon);
+    color: var(--ivory);
+    border: 1px solid var(--maroon-bright);
+  }
+  .btn-primary:hover { background: var(--maroon-bright); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,26,26,0.4); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+  }
+  .btn-secondary:hover { background: rgba(200,168,75,0.1); transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SCROLL INDICATOR ===== */
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    animation: fadeUp 1s ease-out 1.8s forwards; opacity: 0;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.6); }
+  }
+
+  /* ===== DUAL PATHWAY ===== */
+  .dual-path {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+  }
+  .path-panel {
+    position: relative;
+    padding: 4rem 3rem;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex 0.4s ease;
+    text-decoration: none;
+    user-select: none;
+  }
+  .path-panel::before {
+    content: '';
+    position: absolute; inset: 0;
+    transition: opacity 0.4s;
+  }
+  .path-history::before {
+    background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(139,26,26,0.15) 100%);
+  }
+  .path-anime::before {
+    background: linear-gradient(225deg, rgba(10,10,15,0.95) 0%, rgba(200,168,75,0.1) 100%);
+  }
+  .path-bg-text {
+    position: absolute;
+    font-family: var(--font-jp);
+    font-size: 18rem;
+    color: rgba(255,255,255,0.02);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .path-panel:hover .path-bg-text { color: rgba(255,255,255,0.04); }
+  .path-divider {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border), var(--gold-dim), var(--border), transparent);
+  }
+  .path-icon {
+    font-family: var(--font-jp);
+    font-size: 3.5rem;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    position: relative; z-index: 1;
+    transition: transform 0.3s;
+  }
+  .path-panel:hover .path-icon { transform: translateX(6px); }
+  .path-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--maroon-bright);
+    position: relative; z-index: 1;
+    margin-bottom: 0.5rem;
+  }
+  .path-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    color: var(--ivory);
+    position: relative; z-index: 1;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+  .path-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    position: relative; z-index: 1;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+  .path-arrow {
+    position: relative; z-index: 1;
+    margin-top: 1.5rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .path-arrow::after { content: '→'; }
+  .path-panel:hover .path-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ===== SECTION WRAPPER ===== */
+  .section { padding: 6rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+  .divider {
+    width: 100%; height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  /* ===== FEATURED ARTICLES ===== */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .feat-card {
+    background: var(--card);
+    padding: 2rem;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.25s;
+    text-decoration: none;
+  }
+  .feat-card:hover { background: #1C1C28; }
+  .feat-card-bg {
+    position: absolute; inset: 0;
+    font-family: var(--font-jp);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    color: rgba(200,168,75,0.04);
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+  .feat-card:hover .feat-card-bg { color: rgba(200,168,75,0.07); }
+  .feat-tag {
+    position: absolute; top: 1.25rem; left: 1.25rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 1px;
+  }
+  .tag-history { background: rgba(139,26,26,0.5); color: #ff9999; border: 1px solid rgba(139,26,26,0.8); }
+  .tag-anime { background: rgba(200,168,75,0.15); color: var(--gold); border: 1px solid rgba(200,168,75,0.3); }
+  .feat-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ivory);
+    margin-bottom: 0.5rem;
+    position: relative; z-index: 1;
+    line-height: 1.25;
+  }
+  .feat-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    position: relative; z-index: 1;
+    line-height: 1.55;
+  }
+  .feat-read {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    position: relative; z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .feat-card:hover .feat-read { opacity: 1; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--maroon), var(--gold), var(--maroon));
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 3rem 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+  .tl-dot {
+    position: absolute; left: -2rem;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--obsidian);
+    border: 2px solid var(--gold);
+    transform: translateX(-5px);
+    top: 6px;
+  }
+  .tl-era {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--maroon-bright);
+    margin-bottom: 0.3rem;
+  }
+  .tl-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .tl-desc { font-size: 0.88rem; color: var(--muted); max-width: 480px; }
+
+  /* ===== ANATOMY ===== */
+  .anatomy-wrap {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    align-items: start;
+  }
+  .anatomy-svg-wrap {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 1rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Stage = exact aspect-ratio box matching the SVG viewBox (560x180), so hotspot %s always line up */
+  .anatomy-stage {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 560 / 180;
+  }
+  @supports not (aspect-ratio: 1 / 1) {
+    .anatomy-stage { height: 0; padding-top: 32.14%; }
+  }
+  /* Katana SVG illustration */
+  .katana-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .anatomy-hotspot {
+    position: absolute;
+    width: 28px; height: 28px;
+    margin-left: -14px; margin-top: -14px;
+    border-radius: 50%;
+    background: rgba(200,168,75,0.15);
+    border: 1.5px solid var(--gold);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    touch-action: manipulation;
+  }
+  .anatomy-hotspot:hover, .anatomy-hotspot.active {
+    background: rgba(200,168,75,0.35);
+    transform: scale(1.2);
+  }
+  .anatomy-hotspot::after {
+    content: '+';
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .anatomy-info {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: sticky; top: 100px;
+  }
+  .anatomy-info-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+  .anatomy-info-empty .hint-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5; }
+  .anatomy-info-empty p { font-size: 0.85rem; color: var(--muted); }
+  .anatomy-part-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+  .anatomy-part-jp {
+    font-family: var(--font-jp);
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .anatomy-part-desc { font-size: 0.9rem; color: var(--ivory); line-height: 1.7; }
+  .anatomy-parts-list {
+    margin-top: 2rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .parts-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+  }
+  .parts-btn:hover, .parts-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(200,168,75,0.05); }
+
+  /* ===== ANIME DATABASE ===== */
+  .anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .anime-card {
+    background: var(--card);
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .anime-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--maroon), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .anime-card:hover { background: #1A1A24; }
+  .anime-card:hover::before { transform: scaleX(1); }
+  .anime-series {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--maroon-bright);
+    margin-bottom: 0.4rem;
+  }
+  .anime-sword {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ivory);
+    margin-bottom: 0.3rem;
+  }
+  .anime-wielder {
+    font-size: 0.78rem;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .anime-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+  .anime-power {
+    margin-top: 0.8rem;
+    display: flex; gap: 0.4rem; flex-wrap: wrap;
+  }
+  .power-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    background: rgba(139,26,26,0.2);
+    border: 1px solid rgba(139,26,26,0.4);
+    color: #ff9999;
+    border-radius: 1px;
+  }
+
+  /* ===== MYTHS SECTION ===== */
+  .myth-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+  .myth-item {
+    background: var(--card);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .myth-item:hover { background: #1A1A24; }
+  .myth-claim h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--ivory);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .myth-claim p { font-size: 0.83rem; color: var(--muted); }
+  .myth-verdict {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+  }
+  .verdict-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .verdict-false { background: rgba(139,26,26,0.3); color: #ff9999; border: 1px solid var(--maroon); }
+  .verdict-partial { background: rgba(200,168,75,0.15); color: var(--gold); border: 1px solid var(--gold-dim); }
+  .verdict-true { background: rgba(30,120,60,0.2); color: #7dffaa; border: 1px solid rgba(30,120,60,0.5); }
+  .verdict-text { font-size: 0.83rem; color: var(--muted); }
+
+  /* ===== QUIZ ===== */
+  .quiz-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .quiz-question {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ivory);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .quiz-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
+  .quiz-opt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1.25rem;
+    border-radius: 2px;
+    color: var(--ivory);
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .quiz-opt:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,168,75,0.05); }
+  .quiz-opt.selected { border-color: var(--gold); background: rgba(200,168,75,0.1); color: var(--gold); }
+  .opt-letter {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(200,168,75,0.15);
+    border: 1px solid var(--gold-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .quiz-result {
+    display: none;
+    padding: 2rem;
+    text-align: center;
+  }
+  .quiz-result-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .quiz-result-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .quiz-progress {
+    display: flex; justify-content: center; gap: 0.4rem; margin-bottom: 2rem;
+  }
+  .progress-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .progress-dot.done { background: var(--gold); border-color: var(--gold); }
+
+  /* ===== LEGENDARY SWORDS ===== */
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .legend-card {
+    background: var(--card);
+    padding: 2rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .legend-card:hover { background: #1A1A24; }
+  .legend-era {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+  .legend-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ivory);
+  }
+  .legend-jp { font-family: var(--font-jp); font-size: 1rem; color: var(--muted); }
+  .legend-desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; line-height: 1.6; }
+  .legend-status {
+    margin-top: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .status-lost { color: var(--maroon-bright); }
+  .status-preserved { color: #7dffaa; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2.5rem;
+    display: flex;
+    align-items: center; justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+  .footer-logo span { color: var(--maroon-bright); }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a, .footer-links span { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.1em; cursor: pointer; }
+  .footer-links a:hover, .footer-links span:hover { color: var(--gold); }
+  .footer-copy { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* ===== MISC ===== */
+  .separator {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 2rem 0;
+  }
+  .sep-line { flex: 1; height: 1px; background: var(--border); }
+  .sep-icon { color: var(--gold); font-family: var(--font-jp); font-size: 1.2rem; }
+
+  /* ===== ARTICLE MODAL ===== */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(5,5,8,0.85);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 3rem 2.5rem;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1;
+  }
+  .modal-close:hover { color: var(--gold); border-color: var(--gold); }
+  .modal-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 1px;
+    margin-bottom: 1rem;
+    margin-right: 2.5rem;
+  }
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--ivory);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+  }
+  .modal-body p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+  }
+  .modal-body strong { color: var(--gold); font-weight: 600; }
+  .modal-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  /* ===== KATANA HOVER TOOLTIP ===== */
+  .sword-trigger { position: relative; cursor: pointer; }
+  .katana-tooltip {
+    position: fixed;
+    z-index: 400;
+    background: var(--surface);
+    border: 1px solid var(--gold-dim);
+    border-radius: 4px;
+    padding: 1rem;
+    width: min(320px, calc(100vw - 24px));
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+    transition: opacity 0.18s, transform 0.18s;
+  }
+  .katana-tooltip.show { opacity: 1; transform: translateY(0) scale(1); }
+  .katana-tooltip svg { width: 100%; height: auto; display: block; margin-bottom: 0.5rem; }
+  .katana-tooltip-label {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .nav-search { display: none; }
+    .hamburger { display: flex; }
+    .dual-path { grid-template-columns: 1fr; min-height: auto; }
+    .path-divider { width: 100%; height: 1px; }
+    .path-panel { min-height: 320px; padding: 2.5rem 1.75rem; }
+    .featured-grid { grid-template-columns: 1fr; }
+    .anatomy-wrap { grid-template-columns: 1fr; }
+    .anatomy-info { position: static; }
+    .myth-item { grid-template-columns: 1fr; gap: 1rem; }
+    .section { padding: 4rem 1.25rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .anatomy-hotspot { width: 34px; height: 34px; margin-left: -17px; margin-top: -17px; }
+    .modal-box { padding: 2.25rem 1.5rem; }
+    .myth-item { padding: 1.5rem; }
+    .quiz-wrap { padding: 2rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 5.5rem 1.25rem 3rem; }
+    .hero-cta { flex-direction: column; width: 100%; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    .path-panel { padding: 2rem 1.25rem; min-height: 280px; }
+    .path-bg-text { font-size: 10rem; }
+    .legend-grid, .anime-grid { grid-template-columns: 1fr; }
+    .quiz-wrap { padding: 1.75rem 1.25rem; }
+    .quiz-opt { font-size: 0.85rem; padding: 0.75rem 1rem; }
+    .feat-card { padding: 1.5rem; min-height: 260px; }
+    .anatomy-hotspot { width: 38px; height: 38px; margin-left: -19px; margin-top: -19px; }
+    .anatomy-hotspot::after { font-size: 0.95rem; }
+    .nav-logo { font-size: 0.95rem; }
+    .modal-box { padding: 2rem 1.25rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* Mobile nav overlay */
+  .mobile-nav {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,10,15,0.97);
+    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav span { font-family: var(--font-display); font-size: 1.6rem; color: var(--gold); text-decoration: none; letter-spacing: 0.1em; cursor: pointer; }
+  .mobile-nav-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo" style="cursor:pointer" onclick="goTo('top')">Katana<span>Chronicles</span></span>
+  <ul class="nav-links">
+    <li><span onclick="goTo('sejarah')">Sejarah Nyata</span></li>
+    <li><span onclick="goTo('anime')">Dunia Anime</span></li>
+    <li><span onclick="goTo('mitos')">Mitos vs Fakta</span></li>
+    <li><span onclick="goTo('kuis')">Kuis</span></li>
+  </ul>
+  <input class="nav-search" type="text" placeholder="Cari pedang, karakter…" id="searchInput">
+  <div class="hamburger" id="menuBtn" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <span onclick="goTo('sejarah');document.getElementById('mobileNav').classList.remove('open')">Sejarah Nyata</span>
+  <span onclick="goTo('anime');document.getElementById('mobileNav').classList.remove('open')">Dunia Anime</span>
+  <span onclick="goTo('mitos');document.getElementById('mobileNav').classList.remove('open')">Mitos vs Fakta</span>
+  <span onclick="goTo('kuis');document.getElementById('mobileNav').classList.remove('open')">Kuis</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="slash"></div>
+  <div class="hero-jp">刀</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Ensiklopedia Interaktif Katana</p>
+    <h1 class="hero-title">
+      Antara <span class="accent">Sejarah</span><br>
+      &amp; <span class="slash-word">Legenda</span>
+    </h1>
+    <p class="hero-desc">
+      Dari pandai besi era Kamakura hingga pedang bernyawa di dunia anime — 
+      temukan setiap sisi dari senjata paling ikonik Jepang.
+    </p>
+    <div class="hero-cta">
+      <span class="btn btn-primary" onclick="goTo('sejarah')">⚔ Jelajahi Sejarah Nyata</span>
+      <span class="btn btn-secondary" onclick="goTo('anime')">✦ Jelajahi Dunia Anime</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Gulir ke bawah
+  </div>
+</section>
+
+<!-- DUAL PATHWAY -->
+<div class="dual-path">
+  <div class="path-panel path-history" onclick="goTo('sejarah')">
+    <div class="path-bg-text">侍</div>
+    <div class="path-icon">⚔</div>
+    <p class="path-tag">Modul 01</p>
+    <h2 class="path-title">The Historical Edge</h2>
+    <p class="path-desc">Selami era samurai, teknik Tamahagane, dan koleksi pedang nyata yang mengubah sejarah Jepang.</p>
+    <span class="path-arrow">Mulai Eksplorasi</span>
+  </div>
+  <div class="path-divider"></div>
+  <div class="path-panel path-anime" onclick="goTo('anime')">
+    <div class="path-bg-text">鬼</div>
+    <div class="path-icon">✦</div>
+    <p class="path-tag">Modul 02</p>
+    <h2 class="path-title">The Fantasy Edge</h2>
+    <p class="path-desc">Database katana dari Demon Slayer, One Piece, Bleach — beserta kekuatan, material fiktif, dan wieldernya.</p>
+    <span class="path-arrow">Mulai Eksplorasi</span>
+  </div>
+</div>
+
+<!-- FEATURED ARTICLES -->
+<div style="background: var(--surface);">
+<div class="section">
+  <p class="section-eyebrow">Artikel Unggulan</p>
+  <h2 class="section-title">Katana Bulan Ini</h2>
+  <p class="section-sub">Pilihan editorial terbaik — perbandingan, profil, dan kisah di balik pedang terpopuler.</p>
+  <div class="featured-grid">
+    <div class="feat-card" onclick="openArticle('muramasa')">
+      <div class="feat-card-bg">刀</div>
+      <span class="feat-tag tag-history">Sejarah</span>
+      <h3 class="feat-title">Muramasa vs. Masamune: Pertarungan Dua Legenda</h3>
+      <p class="feat-desc">Siapakah pandai besi terhebat Jepang? Kutukan Muramasa atau ketenangan Masamune — kita telaah bukti sejarahnya.</p>
+      <span class="feat-read">Baca Artikel →</span>
+    </div>
+    <div class="feat-card" onclick="openArticle('nichirin')">
+      <div class="feat-card-bg">漆</div>
+      <span class="feat-tag tag-anime">Anime</span>
+      <h3 class="feat-title">Nichirin Blade: Sains di Balik Pedang Pembasmi Oni</h3>
+      <p class="feat-desc">Bijih Nichirin menyerap cahaya matahari — mungkinkah material seperti ini eksis di dunia nyata?</p>
+      <span class="feat-read">Baca Artikel →</span>
+    </div>
+    <div class="feat-card" onclick="openArticle('zoro')">
+      <div class="feat-card-bg">刃</div>
+      <span class="feat-tag tag-anime">Anime</span>
+      <h3 class="feat-title">Shusui Zoro: Dari Mihawk hingga Wado Ichimonji</h3>
+      <p class="feat-desc">Profil lengkap koleksi pedang Roronoa Zoro dan teknik pertarungan Santoryu-nya.</p>
+      <span class="feat-read">Baca Artikel →</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SEJARAH -->
+<div id="sejarah">
+<div class="section">
+  <p class="section-eyebrow">Modul 01 — Sejarah Nyata</p>
+  <h2 class="section-title">Garis Waktu Evolusi</h2>
+  <p class="section-sub">Perjalanan pedang Jepang dari bentuk lurus hingga Katana melengkung yang kita kenal hari ini.</p>
+
+  <div class="timeline" id="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-era">abad ke-7 — era nara</p>
+      <p class="tl-name">Chokutō (直刀)</p>
+      <p class="tl-desc">Pedang lurus berpola Tiongkok, digunakan oleh aristokrasi Jepang sebelum era Samurai. Belum ada kelengkungan khas Jepang.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-era">abad ke-9 — era heian</p>
+      <p class="tl-name">Tachi (太刀)</p>
+      <p class="tl-desc">Pedang melengkung pertama Jepang, digantung terbalik di pinggang. Didesain untuk samurai berkuda dalam pertempuran terbuka.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-era">abad ke-13 — era kamakura</p>
+      <p class="tl-name">Katana (刀) Lahir</p>
+      <p class="tl-desc">Katana muncul sebagai respons terhadap pertempuran jarak dekat. Dipakai di pinggang dengan mata ke atas untuk draw-and-strike yang lebih cepat.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-era">abad ke-15–16 — era sengoku</p>
+      <p class="tl-name">Puncak Seni Pembuatan</p>
+      <p class="tl-desc">Era perang saudara mendorong inovasi. Pandai besi seperti Masamune dan Muramasa menyempurnakan teknik Hizen dan Soshu — pola Hamon mencapai keindahan tertinggi.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-era">abad ke-19 — era meiji</p>
+      <p class="tl-name">Katana Dilarang, Lalu Dilestarikan</p>
+      <p class="tl-desc">Dekret Hatorei 1876 melarang samurai membawa pedang. Namun seni tempa Katana berlanjut sebagai warisan budaya — bukan senjata.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ANATOMI INTERAKTIF -->
+<div style="background: var(--surface);">
+<div class="section">
+  <p class="section-eyebrow">Anatomi Interaktif</p>
+  <h2 class="section-title">Klik Setiap Bagian</h2>
+  <p class="section-sub">Arahkan ke titik emas pada ilustrasi Katana untuk mempelajari fungsi setiap komponennya.</p>
+
+  <div class="anatomy-wrap">
+    <div class="anatomy-svg-wrap" id="anatomySvgWrap">
+      <div class="anatomy-stage">
+      <!-- Katana SVG Illustration -->
+      <svg class="katana-svg" viewBox="0 0 560 180" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <!-- Blade / Ha -->
+        <polygon points="20,88 490,78 500,90 490,102 20,92" fill="#2A2A3A" stroke="#C8A84B" stroke-width="0.5"/>
+        <!-- Blade edge -->
+        <line x1="20" y1="88" x2="490" y2="78" stroke="#E8E0D0" stroke-width="1.5" opacity="0.7"/>
+        <!-- Hamon (temper line) -->
+        <path d="M 20 91 Q 80 86 140 91 Q 200 95 260 89 Q 320 84 380 90 Q 430 94 490 90" fill="none" stroke="#C8A84B" stroke-width="1" opacity="0.5" stroke-dasharray="4,3"/>
+        <!-- Kissaki (tip) -->
+        <polygon points="490,78 540,90 490,102" fill="#3A3A4A" stroke="#C8A84B" stroke-width="1"/>
+        <!-- Yokote line -->
+        <line x1="490" y1="78" x2="490" y2="102" stroke="#C8A84B" stroke-width="1.5" opacity="0.8"/>
+        <!-- Mune (spine) -->
+        <line x1="20" y1="92" x2="490" y2="102" stroke="#8A8A9A" stroke-width="1" opacity="0.4"/>
+        <!-- Habaki -->
+        <rect x="60" y="80" width="22" height="20" rx="1" fill="#4A4A5A" stroke="#C8A84B" stroke-width="1"/>
+        <!-- Tsuba (guard) -->
+        <ellipse cx="50" cy="90" rx="14" ry="24" fill="#2A2A3A" stroke="#C8A84B" stroke-width="1.5"/>
+        <ellipse cx="50" cy="90" rx="10" ry="18" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.4"/>
+        <!-- Tsuka (handle) -->
+        <rect x="2" y="83" width="50" height="14" rx="2" fill="#3A2A1A" stroke="#8A6F2A" stroke-width="1"/>
+        <!-- Tsuka ito wrapping -->
+        <line x1="8" y1="83" x2="8" y2="97" stroke="#8A6F2A" stroke-width="2" opacity="0.6"/>
+        <line x1="16" y1="83" x2="16" y2="97" stroke="#8A6F2A" stroke-width="2" opacity="0.6"/>
+        <line x1="24" y1="83" x2="24" y2="97" stroke="#8A6F2A" stroke-width="2" opacity="0.6"/>
+        <line x1="32" y1="83" x2="32" y2="97" stroke="#8A6F2A" stroke-width="2" opacity="0.6"/>
+        <line x1="40" y1="83" x2="40" y2="97" stroke="#8A6F2A" stroke-width="2" opacity="0.6"/>
+        <!-- Menuki (ornament) -->
+        <circle cx="25" cy="90" r="3" fill="#C8A84B" opacity="0.7"/>
+        <!-- Kashira (pommel) -->
+        <rect x="0" y="82" width="6" height="16" rx="2" fill="#4A4A5A" stroke="#C8A84B" stroke-width="1"/>
+        <!-- Nakago (tang — hidden) -->
+        <!-- Labels -->
+        <text x="280" y="120" fill="#C8A84B" font-size="8" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">Ha (刃) — Mata Pedang</text>
+      </svg>
+
+      <!-- Hotspots (posisi % dihitung dari koordinat asli viewBox 560x180, jadi akurat di semua ukuran layar) -->
+      <div class="anatomy-hotspot" style="left:0.5%;top:50%" data-part="kashira" title="Kashira"></div>
+      <div class="anatomy-hotspot" style="left:4.8%;top:50%" data-part="tsuka" title="Tsuka"></div>
+      <div class="anatomy-hotspot" style="left:8.9%;top:35%" data-part="menuki" title="Menuki"></div>
+      <div class="anatomy-hotspot" style="left:14%;top:25%" data-part="tsuba" title="Tsuba"></div>
+      <div class="anatomy-hotspot" style="left:23%;top:25%" data-part="habaki" title="Habaki"></div>
+      <div class="anatomy-hotspot" style="left:46.4%;top:60%" data-part="hamon" title="Hamon"></div>
+      <div class="anatomy-hotspot" style="left:60%;top:30%" data-part="ha" title="Ha"></div>
+      <div class="anatomy-hotspot" style="left:87.5%;top:32%" data-part="yokote" title="Yokote"></div>
+      <div class="anatomy-hotspot" style="left:92%;top:50%" data-part="kissaki" title="Kissaki"></div>
+      </div>
+    </div>
+
+    <div class="anatomy-info" id="anatomyInfo">
+      <div class="anatomy-info-empty" id="anatomyEmpty">
+        <div class="hint-icon">⚔</div>
+        <p>Klik titik emas pada ilustrasi<br>untuk mempelajari bagian Katana</p>
+        <div class="anatomy-parts-list">
+          <button class="parts-btn" data-part="kashira">Kashira</button>
+          <button class="parts-btn" data-part="tsuka">Tsuka</button>
+          <button class="parts-btn" data-part="menuki">Menuki</button>
+          <button class="parts-btn" data-part="tsuba">Tsuba</button>
+          <button class="parts-btn" data-part="habaki">Habaki</button>
+          <button class="parts-btn" data-part="hamon">Hamon</button>
+          <button class="parts-btn" data-part="ha">Ha</button>
+          <button class="parts-btn" data-part="yokote">Yokote</button>
+          <button class="parts-btn" data-part="kissaki">Kissaki</button>
+        </div>
+      </div>
+      <div id="anatomyDetail" style="display:none">
+        <p class="anatomy-part-name" id="partName"></p>
+        <p class="anatomy-part-jp" id="partJp"></p>
+        <p class="anatomy-part-desc" id="partDesc"></p>
+        <div class="anatomy-parts-list" style="margin-top:1.5rem">
+          <button class="parts-btn" data-part="kashira">Kashira</button>
+          <button class="parts-btn" data-part="tsuka">Tsuka</button>
+          <button class="parts-btn" data-part="menuki">Menuki</button>
+          <button class="parts-btn" data-part="tsuba">Tsuba</button>
+          <button class="parts-btn" data-part="habaki">Habaki</button>
+          <button class="parts-btn" data-part="hamon">Hamon</button>
+          <button class="parts-btn" data-part="ha">Ha</button>
+          <button class="parts-btn" data-part="yokote">Yokote</button>
+          <button class="parts-btn" data-part="kissaki">Kissaki</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PEDANG LEGENDARIS -->
+<div class="section">
+  <p class="section-eyebrow">Koleksi Dunia Nyata</p>
+  <h2 class="section-title">Pedang Legendaris</h2>
+  <p class="section-sub">Katana yang mengubah sejarah — ada yang masih tersimpan, ada yang raib ditelan waktu.</p>
+  <div class="legend-grid">
+    <div class="legend-card">
+      <p class="legend-era">abad ke-13 — pandai besi masamune</p>
+      <p class="legend-name sword-trigger" data-sword="honjo">Honjo Masamune</p>
+      <p class="legend-jp">本庄正宗</p>
+      <p class="legend-desc">Dianggap sebagai katana paling sempurna yang pernah dibuat. Berpindah tangan dari shogun ke shogun, disita Amerika Serikat usai WWII dan kemudian hilang tanpa jejak.</p>
+      <p class="legend-status status-lost">● Status: Hilang (1945)</p>
+    </div>
+    <div class="legend-card">
+      <p class="legend-era">abad ke-10 — pandai besi yasutsuna</p>
+      <p class="legend-name sword-trigger" data-sword="dojigiri">Dōjigiri Yasutsuna</p>
+      <p class="legend-jp">童子切安綱</p>
+      <p class="legend-desc">Salah satu dari Lima Pedang Terbawah Langit. Katana yang digunakan oleh Minamoto no Yorimitsu untuk mengalahkan demon Shuten-dōji di Gunung Ōe.</p>
+      <p class="legend-status status-preserved">● Status: Disimpan di Tokyo National Museum</p>
+    </div>
+    <div class="legend-card">
+      <p class="legend-era">abad ke-16 — pandai besi muramasa</p>
+      <p class="legend-name sword-trigger" data-sword="muramasa">Pedang Muramasa</p>
+      <p class="legend-jp">村正</p>
+      <p class="legend-desc">Terkenal dengan reputasi "haus darah" — kisah kutukan menjadi legenda setelah keluarga Tokugawa berulang kali menderita kecelakaan melibatkan pedang ini.</p>
+      <p class="legend-status status-preserved">● Beberapa spesimen masih eksis</p>
+    </div>
+    <div class="legend-card">
+      <p class="legend-era">abad ke-12 — pandai besi kogarasu maru</p>
+      <p class="legend-name sword-trigger" data-sword="kogarasu">Kogarasu Maru</p>
+      <p class="legend-jp">小烏丸</p>
+      <p class="legend-desc">Pedang transisi antara bentuk lurus dan melengkung — dianggap sebagai nenek moyang Katana. Dipersembahkan kepada Kaisar Kammu oleh dewi perang Hachiman.</p>
+      <p class="legend-status status-preserved">● Disimpan di Istana Kekaisaran Tokyo</p>
+    </div>
+    <div class="legend-card">
+      <p class="legend-era">abad ke-16 — warisan oda nobunaga</p>
+      <p class="legend-name sword-trigger" data-sword="fudo">Fudo Masamune</p>
+      <p class="legend-jp">不動正宗</p>
+      <p class="legend-desc">Katana pendek (tantō) buatan Masamune yang terkenal karena ukiran dewa Fudō Myōō pada bilahnya. Diwariskan di antara para daimyo terkemuka era Sengoku.</p>
+      <p class="legend-status status-preserved">● Disimpan di Gotoh Museum, Tokyo</p>
+    </div>
+    <div class="legend-card">
+      <p class="legend-era">abad ke-11 — jepang kuno</p>
+      <p class="legend-name sword-trigger" data-sword="kusanagi">Kusanagi-no-Tsurugi</p>
+      <p class="legend-jp">草薙の剣</p>
+      <p class="legend-desc">Pedang mitologi Jepang, salah satu dari Tiga Harta Suci Kekaisaran. Menurut legenda, ditemukan di tubuh ular naga raksasa oleh dewa Susanoo.</p>
+      <p class="legend-status status-lost">● Status: Lokasi tidak diketahui publik</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ANIME -->
+<div id="anime" style="background: var(--surface);">
+<div class="section">
+  <p class="section-eyebrow">Modul 02 — Dunia Anime</p>
+  <h2 class="section-title">Database Katana Anime</h2>
+  <p class="section-sub">Dari Nichirin Blade hingga Zanpakutō — profil lengkap katana ikonik dari dunia fiksi.</p>
+
+  <!-- Filter -->
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem">
+    <button class="btn btn-secondary" style="padding:0.4rem 1rem;font-size:0.72rem" onclick="filterAnime('all')" id="f-all">Semua</button>
+    <button class="btn btn-secondary" style="padding:0.4rem 1rem;font-size:0.72rem" onclick="filterAnime('ds')" id="f-ds">Demon Slayer</button>
+    <button class="btn btn-secondary" style="padding:0.4rem 1rem;font-size:0.72rem" onclick="filterAnime('op')" id="f-op">One Piece</button>
+    <button class="btn btn-secondary" style="padding:0.4rem 1rem;font-size:0.72rem" onclick="filterAnime('bl')" id="f-bl">Bleach</button>
+    <button class="btn btn-secondary" style="padding:0.4rem 1rem;font-size:0.72rem" onclick="filterAnime('rk')" id="f-rk">Rurouni Kenshin</button>
+  </div>
+
+  <div class="anime-grid" id="animeGrid">
+    <div class="anime-card" data-series="ds">
+      <p class="anime-series">Demon Slayer</p>
+      <p class="anime-sword sword-trigger" data-sword="nichirin-black">Nichirin Blade — Hitam</p>
+      <p class="anime-wielder">✦ Tanjiro Kamado</p>
+      <p class="anime-desc">Pedang Nichirin langka berwarna hitam yang belum pernah terlihat sebelumnya dalam sejarah Korps Pembunuh Iblis. Warna menunjukkan elemen pengguna.</p>
+      <div class="anime-power">
+        <span class="power-tag">Nichirin Ore</span>
+        <span class="power-tag">Sun Breathing</span>
+        <span class="power-tag">Merah saat marah</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="ds">
+      <p class="anime-series">Demon Slayer</p>
+      <p class="anime-sword sword-trigger" data-sword="nichirin-yellow">Nichirin Blade — Merah & Kuning</p>
+      <p class="anime-wielder">✦ Zenitsu Agatsuma</p>
+      <p class="anime-desc">Pedang petir berwarna kuning keemasan yang cocok dengan teknik pernapasan Petir (Thunder Breathing) Zenitsu yang devastating.</p>
+      <div class="anime-power">
+        <span class="power-tag">Thunder Breathing</span>
+        <span class="power-tag">Godspeed</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="op">
+      <p class="anime-series">One Piece</p>
+      <p class="anime-sword sword-trigger" data-sword="wado">Wado Ichimonji</p>
+      <p class="anime-wielder">✦ Roronoa Zoro</p>
+      <p class="anime-desc">Pedang Grade Meito peringkat atas, warisan dari Kuina. Digunakan Zoro di mulut sebagai pedang ketiga dalam gaya Santoryu-nya.</p>
+      <div class="anime-power">
+        <span class="power-tag">Grade Meito</span>
+        <span class="power-tag">Santoryu</span>
+        <span class="power-tag">Haki</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="op">
+      <p class="anime-series">One Piece</p>
+      <p class="anime-sword sword-trigger" data-sword="yoru">Yoru</p>
+      <p class="anime-wielder">✦ Dracule Mihawk</p>
+      <p class="anime-desc">Pedang terbesar dan terkuat di dunia One Piece — berstatus Saijō Ō Wazamono (Grade 12 Bintang). Bilahnya hitam legam dengan mata berbentuk salib.</p>
+      <div class="anime-power">
+        <span class="power-tag">Saijō Ō Wazamono</span>
+        <span class="power-tag">Black Blade</span>
+        <span class="power-tag">Supreme Grade</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="bl">
+      <p class="anime-series">Bleach</p>
+      <p class="anime-sword sword-trigger" data-sword="zangetsu">Zangetsu</p>
+      <p class="anime-wielder">✦ Ichigo Kurosaki</p>
+      <p class="anime-desc">Zanpakutō unik Ichigo yang mencerminkan dualitas kekuatannya: sisi Shinigami (Zangetsu Tua) dan sisi Hollow (Hollow Ichigo). Bentuk terakhir: Dual Blades.</p>
+      <div class="anime-power">
+        <span class="power-tag">Bankai: Tensa Zangetsu</span>
+        <span class="power-tag">Getsuga Tenshō</span>
+        <span class="power-tag">Hollow</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="bl">
+      <p class="anime-series">Bleach</p>
+      <p class="anime-sword sword-trigger" data-sword="senbonzakura">Senbonzakura</p>
+      <p class="anime-wielder">✦ Byakuya Kuchiki</p>
+      <p class="anime-desc">Zanpakutō yang terbelah menjadi seribu kelopak sakura bak pisau kecil. Dalam Bankai-nya, jutaan bilah nano-scale menyelimuti seluruh area pertempuran.</p>
+      <div class="anime-power">
+        <span class="power-tag">Bankai: Senbonzakura Kageyoshi</span>
+        <span class="power-tag">Scatter</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="rk">
+      <p class="anime-series">Rurouni Kenshin</p>
+      <p class="anime-sword sword-trigger" data-sword="sakabato">Sakabatō Meiji</p>
+      <p class="anime-wielder">✦ Himura Kenshin</p>
+      <p class="anime-desc">Pedang dengan mata terbalik — dibuat sengaja agar tidak bisa membunuh, simbol sumpah Kenshin untuk tidak mencabut nyawa lagi. Material: Baja biasa.</p>
+      <div class="anime-power">
+        <span class="power-tag">Reverse Blade</span>
+        <span class="power-tag">Hiten Mitsurugi</span>
+        <span class="power-tag">Non-lethal</span>
+      </div>
+    </div>
+    <div class="anime-card" data-series="ds">
+      <p class="anime-series">Demon Slayer</p>
+      <p class="anime-sword sword-trigger" data-sword="nichirin-red">Nichirin Blade — Merah Tua</p>
+      <p class="anime-wielder">✦ Kyōjurō Rengoku</p>
+      <p class="anime-desc">Pedang Flame Hashira berwarna oranye kemerahan — cocok dengan Flame Breathing yang diwarisi turun-temurun oleh klan Rengoku.</p>
+      <div class="anime-power">
+        <span class="power-tag">Flame Breathing</span>
+        <span class="power-tag">Flame Hashira</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MITOS VS FAKTA -->
+<div id="mitos">
+<div class="section">
+  <p class="section-eyebrow">Analisis Kritis</p>
+  <h2 class="section-title">Mitos vs. Fakta</h2>
+  <p class="section-sub">Kami menguji klaim-klaim spektakuler anime terhadap fisika dan sejarah dunia nyata.</p>
+
+  <div class="myth-list">
+    <div class="myth-item">
+      <div class="myth-claim">
+        <h3>"Katana bisa membelah peluru yang melayang di udara"</h3>
+        <p>Adegan ikonik di berbagai anime menunjukkan samurai memotong peluru tepat di tengah penerbangan.</p>
+      </div>
+      <div class="myth-verdict">
+        <span class="verdict-badge verdict-false">Mitos</span>
+        <p class="verdict-text">Peluru bergerak pada 300–900 m/detik. Waktu reaksi manusia ~200ms, jauh terlambat untuk mendeteksi dan menangkis peluru. Uji Mythbusters dan fisikawan mengkonfirmasi ini mustahil secara fisiologis.</p>
+      </div>
+    </div>
+    <div class="myth-item">
+      <div class="myth-claim">
+        <h3>"Katana bisa memotong baja/besi sama mudahnya dengan kayu"</h3>
+        <p>Karakter anime sering mengiris baju besi besi dan senjata lawan seperti memotong tahu.</p>
+      </div>
+      <div class="myth-verdict">
+        <span class="verdict-badge verdict-false">Mitos</span>
+        <p class="verdict-text">Baja Tamahagane yang digunakan katana memiliki kekerasan Rockwell ~60 HRC. Baja modern bisa lebih keras. Katana nyata akan retak atau tumpul bila mengenai besi keras, bukan mengirisnya.</p>
+      </div>
+    </div>
+    <div class="myth-item">
+      <div class="myth-claim">
+        <h3>"Katana adalah pedang terkuat di dunia"</h3>
+        <p>Klaim populer bahwa tidak ada pedang yang setara atau melampaui kualitas Katana.</p>
+      </div>
+      <div class="myth-verdict">
+        <span class="verdict-badge verdict-partial">Sebagian Benar</span>
+        <p class="verdict-text">Katana memiliki metalurgi yang sangat canggih untuk era dan teknologinya — khususnya teknik diferensial pengerasan dengan tanah liat (tsuchioki). Namun baja Damaskus dan Toledo juga memiliki keunggulan sendiri. Tidak ada pedang "terbaik absolut".</p>
+      </div>
+    </div>
+    <div class="myth-item">
+      <div class="myth-claim">
+        <h3>"Proses pembuatan Katana memerlukan ribuan kali lipatan baja"</h3>
+        <p>Sering diklaim Katana dilipat 1.000 hingga 10.000 kali untuk mencapai kekuatan maksimal.</p>
+      </div>
+      <div class="myth-verdict">
+        <span class="verdict-badge verdict-partial">Sebagian Benar</span>
+        <p class="verdict-text">Baja memang dilipat berulang kali (biasanya 8–16 kali, menghasilkan 256–65.536 lapisan). Namun lipatan berlebihan justru merusak kualitas. Tujuannya bukan kekuatan maksimal, melainkan distribusi karbon yang merata.</p>
+      </div>
+    </div>
+    <div class="myth-item">
+      <div class="myth-claim">
+        <h3>"Samurai selalu membawa Katana ke mana-mana"</h3>
+        <p>Gambaran samurai dengan katana di pinggang sepanjang hari adalah ikon yang kita kenal.</p>
+      </div>
+      <div class="myth-verdict">
+        <span class="verdict-badge verdict-true">Fakta (dengan nuansa)</span>
+        <p class="verdict-text">Benar! Selama era Edo, samurai memang membawa daisho (katana + wakizashi) sebagai simbol status. Namun di era damai ini, fungsinya lebih seremonial. Saat berperang, banyak samurai lebih memilih naginata atau yari (tombak).</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- KUIS -->
+<div id="kuis" style="background: var(--surface);">
+<div class="section">
+  <p class="section-eyebrow">Interaktif</p>
+  <h2 class="section-title" style="text-align:center">Katana Apa yang Cocok<br>denganmu?</h2>
+  <p class="section-sub" style="text-align:center;max-width:400px;margin-left:auto;margin-right:auto">Jawab 4 pertanyaan singkat untuk menemukan pedang yang mencerminkan kepribadianmu.</p>
+
+  <div class="quiz-wrap">
+    <div id="quizGame">
+      <div class="quiz-progress" id="quizProgress">
+        <div class="progress-dot" id="dot0"></div>
+        <div class="progress-dot" id="dot1"></div>
+        <div class="progress-dot" id="dot2"></div>
+        <div class="progress-dot" id="dot3"></div>
+      </div>
+      <p class="quiz-question" id="quizQ"></p>
+      <p class="quiz-sub" id="quizQnum"></p>
+      <div class="quiz-options" id="quizOpts"></div>
+    </div>
+    <div class="quiz-result" id="quizResult">
+      <div style="font-size:3rem;margin-bottom:0.5rem" id="resultIcon"></div>
+      <p class="quiz-result-name" id="resultName"></p>
+      <p class="quiz-result-desc" id="resultDesc"></p>
+      <button class="btn btn-secondary" onclick="resetQuiz()" style="margin-top:0.5rem">Coba Lagi</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Katana<span>Chronicles</span></div>
+  <ul class="footer-links">
+    <li><span onclick="goTo('sejarah')">Sejarah</span></li>
+    <li><span onclick="goTo('anime')">Anime</span></li>
+    <li><span onclick="goTo('mitos')">Mitos</span></li>
+    <li><span onclick="goTo('kuis')">Kuis</span></li>
+  </ul>
+  <p class="footer-copy">© 2026 KatanaChronicles · Fase 1.0 MVP · Dibuat dengan ⚔</p>
+</footer>
+
+<script>
+// ===== SMOOTH SCROLL TANPA HASH NAVIGATION =====
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===== ANATOMY DATA =====
+const parts = {
+  kashira: {
+    name: 'Kashira',
+    jp: '頭 — Ujung Gagang',
+    desc: 'Tutup logam di ujung gagang (tsuka). Berfungsi sebagai pemberat yang menyeimbangkan berat bilah pedang, sekaligus pelindung tangan jika pedang digenggam terbalik. Biasanya terbuat dari besi atau tembaga dengan ukiran dekoratif.'
+  },
+  tsuka: {
+    name: 'Tsuka',
+    jp: '柄 — Gagang Pedang',
+    desc: 'Gagang katana yang dilapisi kulit ikan pari (same) kemudian dibungkus tali sutra atau katun (ito) dalam pola berlian. Panjang tsuka ideal sekitar 1/4 panjang total pedang, cukup untuk genggaman dua tangan.'
+  },
+  menuki: {
+    name: 'Menuki',
+    jp: '目貫 — Ornamen Gagang',
+    desc: 'Ornamen logam kecil yang diselipkan di bawah ikatan ito. Selain dekoratif, menuki memberikan traksi tambahan saat menggenggam pedang dan mencegah tangan tergelincir. Motifnya bisa berupa naga, bunga, atau lambang klan.'
+  },
+  tsuba: {
+    name: 'Tsuba',
+    jp: '鍔 — Pelindung Tangan',
+    desc: 'Pelat bundar yang memisahkan gagang dari bilah pedang. Berfungsi melindungi tangan dari tebasan pedang lawan dan mencegah tangan melorot ke bilah tajam. Tsuba adalah kanvas seni tersendiri — bisa berupa besi polos hingga perunggu dengan ukiran rumit.'
+  },
+  habaki: {
+    name: 'Habaki',
+    jp: '鎺 — Kolar Bilah',
+    desc: 'Baji logam berbentuk baji yang dipasang di pangkal bilah, tepat di atas tsuba. Berfungsi mengunci pedang dalam sarungnya (saya) agar tidak keluar sendiri, sekaligus memfasilitasi penarikan pedang yang cepat dengan sentakan pergelangan tangan.'
+  },
+  hamon: {
+    name: 'Hamon',
+    jp: '刃紋 — Garis Temper',
+    desc: 'Garis batas antara bagian yang dikeraskan (ha) dan bagian lunak (ji) pada bilah pedang. Dibentuk dengan melapisi bilah dengan tanah liat sebelum proses quenching — bagian tak berlapis menjadi keras. Hamon adalah tanda tangan estetika setiap pandai besi, pola yang unik seperti sidik jari.'
+  },
+  ha: {
+    name: 'Ha',
+    jp: '刃 — Mata Pedang',
+    desc: 'Sisi tajam bilah katana. Dikeraskan melalui proses quenching cepat hingga mencapai kekerasan Rockwell ~60 HRC. Ketajaman optimal katana bisa mencapai sudut 7–10 derajat. Ha terbuat dari baja keras (hagane) yang dipadukan dengan inti baja lunak (shingane) untuk fleksibilitas.'
+  },
+  yokote: {
+    name: 'Yokote',
+    jp: '横手 — Garis Batas Ujung',
+    desc: 'Garis lurus yang membagi bilah utama dengan ujung pedang (kissaki). Yokote menandai titik di mana bilah mulai bertransisi menjadi ujung runcing. Presisi garis yokote adalah salah satu standar utama kualitas dalam penilaian katana tradisional Jepang.'
+  },
+  kissaki: {
+    name: 'Kissaki',
+    jp: '切先 — Ujung Pedang',
+    desc: 'Ujung atau mata runcing katana — bagian yang paling teknis dan sulit dibuat. Tiga ukuran: ko-kissaki (kecil, halus), chu-kissaki (medium, paling umum), dan o-kissaki (besar, lebih agresif). Kualitas kissaki adalah cerminan keahlian pandai besi secara keseluruhan.'
+  }
+};
+
+function showPart(key) {
+  const p = parts[key];
+  if (!p) return;
+  document.getElementById('anatomyEmpty').style.display = 'none';
+  document.getElementById('anatomyDetail').style.display = 'block';
+  document.getElementById('partName').textContent = p.name;
+  document.getElementById('partJp').textContent = p.jp;
+  document.getElementById('partDesc').textContent = p.desc;
+  document.querySelectorAll('.anatomy-hotspot').forEach(h => h.classList.remove('active'));
+  document.querySelectorAll('.parts-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.part === key);
+  });
+  const h = document.querySelector(`.anatomy-hotspot[data-part="${key}"]`);
+  if (h) h.classList.add('active');
+}
+
+document.querySelectorAll('.anatomy-hotspot, .parts-btn').forEach(el => {
+  el.addEventListener('click', () => showPart(el.dataset.part));
+});
+
+// ===== TIMELINE SCROLL ANIMATION =====
+const tlItems = document.querySelectorAll('.tl-item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 100);
+    }
+  });
+}, { threshold: 0.15 });
+tlItems.forEach(item => observer.observe(item));
+
+// ===== ANIME FILTER =====
+function filterAnime(series) {
+  const cards = document.querySelectorAll('.anime-card');
+  cards.forEach(c => {
+    c.style.display = (series === 'all' || c.dataset.series === series) ? '' : 'none';
+  });
+  document.querySelectorAll('[id^="f-"]').forEach(b => b.style.opacity = '0.5');
+  const btn = document.getElementById('f-' + series);
+  if (btn) btn.style.opacity = '1';
+}
+filterAnime('all');
+
+// ===== QUIZ =====
+const quizData = [
+  {
+    q: 'Dalam sebuah pertarungan, kamu lebih memilih…',
+    opts: ['Kecepatan & serangan pertama', 'Kekuatan brutal & dominasi', 'Strategi & membaca lawan', 'Bertahan sambil menunggu momen']
+  },
+  {
+    q: 'Warna apa yang paling mencerminkan kepribadianmu?',
+    opts: ['Hitam — misterius & tak terduga', 'Merah — penuh semangat & gairah', 'Putih/Abu — tenang & bersih', 'Kuning — ceria & energik']
+  },
+  {
+    q: 'Kamu lebih tertarik pada…',
+    opts: ['Sejarah & tradisi samurai nyata', 'Kekuatan magis & dunia fiksi', 'Seni & estetika bilah pedang', 'Pertarungan & teknik tempur']
+  },
+  {
+    q: 'Kata yang paling menggambarkanmu adalah…',
+    opts: ['Misterius', 'Berapi-api', 'Damai', 'Teguh']
+  }
+];
+
+const results = [
+  { name: 'Yoru — Pedang Mihawk', icon: '🖤', desc: 'Kamu adalah "The Black Blade" — tak tertandingi, tenang di permukaan tapi dahsyat saat bertindak. Orang sering salah menilaimu hingga terlambat.' },
+  { name: 'Zangetsu — Pedang Ichigo', icon: '⚡', desc: 'Kamu adalah jiwa yang terbagi antara dua dunia — liar tapi penuh tekad. Kekuatanmu meledak dalam momen yang paling dibutuhkan.' },
+  { name: 'Sakabatō — Pedang Kenshin', icon: '🌸', desc: 'Kamu adalah pelindung yang bijak. Kekuatanmu nyata, tapi kamu memilih jalannya dengan hati-nurani — bukan karena lemah, tapi karena lebih kuat dari itu.' },
+  { name: 'Wado Ichimonji — Pedang Zoro', icon: '💙', desc: 'Kamu adalah jiwa yang setia pada prinsip dan sumpahmu. Seperti pedang yang dijaga Zoro demi Kuina, kamu membawa beban kenangan sebagai kekuatan.' }
+];
+
+let answers = [];
+let current = 0;
+
+function renderQuiz() {
+  const q = quizData[current];
+  document.getElementById('quizQ').textContent = q.q;
+  document.getElementById('quizQnum').textContent = `Pertanyaan ${current + 1} dari ${quizData.length}`;
+  const opts = document.getElementById('quizOpts');
+  opts.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => {
+      answers.push(i);
+      document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(() => {
+        current++;
+        document.getElementById('dot' + (current-1)).classList.add('done');
+        if (current >= quizData.length) showResult();
+        else renderQuiz();
+      }, 400);
+    };
+    opts.appendChild(btn);
+  });
+}
+
+function showResult() {
+  document.getElementById('quizGame').style.display = 'none';
+  const res = document.getElementById('quizResult');
+  res.style.display = 'block';
+  // simple scoring: sum answers mod results length
+  const idx = answers.reduce((a, b) => a + b, 0) % results.length;
+  const r = results[idx];
+  document.getElementById('resultIcon').textContent = r.icon;
+  document.getElementById('resultName').textContent = r.name;
+  document.getElementById('resultDesc').textContent = r.desc;
+}
+
+function resetQuiz() {
+  answers = []; current = 0;
+  document.getElementById('quizGame').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  document.querySelectorAll('.progress-dot').forEach(d => d.classList.remove('done'));
+  renderQuiz();
+}
+
+renderQuiz();
+
+// ===== SEARCH =====
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  if (!q) { document.querySelectorAll('.anime-card, .legend-card, .feat-card').forEach(c => c.style.opacity = '1'); return; }
+  document.querySelectorAll('.anime-card, .legend-card, .feat-card').forEach(c => {
+    const text = c.textContent.toLowerCase();
+    c.style.opacity = text.includes(q) ? '1' : '0.25';
+  });
+});
+</script>
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="articleModal" onclick="if(event.target===this) closeArticle()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeArticle()">✕</button>
+    <span class="modal-tag" id="modalTag"></span>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- KATANA TOOLTIP -->
+<div class="katana-tooltip" id="katanaTooltip"></div>
+
+<script>
+// ===== ARTICLE DATA & MODAL =====
+const articles = {
+  muramasa: {
+    tag: 'Sejarah', tagClass: 'tag-history',
+    title: 'Muramasa vs. Masamune: Pertarungan Dua Legenda',
+    body: `
+      <p>Dalam dunia pandai besi Jepang, dua nama berdiri di atas yang lain: <strong>Gorō Nyūdō Masamune</strong> dari era Kamakura, dan <strong>Sengo Muramasa</strong> dari era Muromachi. Keduanya melahirkan bilah-bilah yang dianggap sebagai puncak seni metalurgi tradisional — namun reputasi mereka berkembang ke arah yang sangat berlawanan.</p>
+      <p>Masamune dikenal lewat keseimbangan dan ketenangan karyanya. Bilahnya memiliki pola Hamon yang lembut bergelombang, hasil dari kontrol suhu dan tanah liat yang presisi. Banyak yang percaya pedang Masamune "menenangkan" penggunanya — sebuah pedang yang hanya akan dicabut bila benar-benar diperlukan.</p>
+      <div class="modal-divider"></div>
+      <p>Muramasa sebaliknya — pedangnya terkenal tajam secara ekstrem, namun dibalut legenda kelam. Cerita rakyat era Edo menyebut pedang Muramasa "haus darah", sebagian dipicu insiden berulang yang melibatkan keluarga Tokugawa dan bilah buatannya, hingga shogun Tokugawa sempat melarang kepemilikan pedang Muramasa di kalangan elite.</p>
+      <p>Secara historis, tidak ada bukti metalurgi bahwa satu pandai besi "lebih unggul" dari yang lain — keduanya menguasai teknik diferensial hardening dengan keahlian setara. Perbedaan reputasi mereka lebih banyak lahir dari cerita rakyat dan konteks politik ketimbang kualitas baja semata.</p>
+    `
+  },
+  nichirin: {
+    tag: 'Anime', tagClass: 'tag-anime',
+    title: 'Nichirin Blade: Sains di Balik Pedang Pembasmi Oni',
+    body: `
+      <p>Dalam <em>Demon Slayer</em>, Nichirin Blade dibuat dari bijih langka yang menyerap sinar matahari — satu-satunya material yang mampu membunuh oni secara permanen. Warna bilah berubah sesuai elemen pernapasan penggunanya, dari merah membara hingga hitam misterius.</p>
+      <p>Secara konsep, ide "menyimpan" energi matahari dalam logam padat berbenturan langsung dengan hukum termodinamika. Energi foton yang diserap permukaan logam akan terdisipasi sebagai panas dalam hitungan detik, bukan tersimpan stabil untuk dilepaskan saat menebas.</p>
+      <div class="modal-divider"></div>
+      <p>Namun ide dasarnya — material yang bereaksi terhadap cahaya — bukan sepenuhnya fiksi. Di dunia nyata ada <strong>material fotokromik</strong> yang berubah warna saat terkena UV, serta paduan logam dengan sifat reflektif tinggi yang dipakai dalam industri aerospace. Nichirin Ore adalah ekstrapolasi artistik dari sains material nyata, dibungkus dalam logika dunia fantasi.</p>
+      <p>Yang lebih realistis secara historis adalah filosofi di balik desainnya: banyak budaya pandai besi, termasuk Jepang, memang mengasosiasikan warna bilah dan pola Hamon dengan "jiwa" atau karakter pedang — sebuah tradisi yang jelas menginspirasi konsep Nichirin Blade.</p>
+    `
+  },
+  zoro: {
+    tag: 'Anime', tagClass: 'tag-anime',
+    title: 'Shusui Zoro: Dari Mihawk hingga Wado Ichimonji',
+    body: `
+      <p>Roronoa Zoro, salah satu karakter paling ikonik di <em>One Piece</em>, dikenal lewat teknik Santoryu — pertarungan tiga pedang, satu di antaranya digenggam di mulut. Koleksi pedangnya berkembang seiring cerita, masing-masing membawa nilai sejarah dan emosional tersendiri.</p>
+      <p><strong>Wado Ichimonji</strong> adalah pedang Grade Meito (peringkat tertinggi) yang diwariskan dari Kuina, sahabat masa kecil Zoro. Pedang ini menjadi simbol sumpahnya untuk menjadi pendekar pedang terkuat di dunia.</p>
+      <div class="modal-divider"></div>
+      <p><strong>Shusui</strong>, pedang hitam legendaris dari negeri Wano, sempat dimiliki Ryuma — samurai legendaris yang pernah membunuh naga. Zoro memperolehnya setelah pertarungan di Thriller Bark, menggantikan Yubashiri yang patah.</p>
+      <p>Klasifikasi grade pedang di One Piece (dari biasa hingga Saijō Ō Wazamono) mencerminkan sistem peringkat pedang nyata di Jepang seperti <em>Tokubetsu Kicho</em> dan <em>Jūyō Bunkazai</em> — penghargaan resmi untuk pedang bersejarah dengan nilai budaya tinggi.</p>
+    `
+  }
+};
+
+function openArticle(key) {
+  const a = articles[key];
+  if (!a) return;
+  document.getElementById('modalTag').textContent = a.tag;
+  document.getElementById('modalTag').className = 'modal-tag ' + a.tagClass;
+  document.getElementById('modalTitle').textContent = a.title;
+  document.getElementById('modalBody').innerHTML = a.body;
+  document.getElementById('articleModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  document.getElementById('articleModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeArticle();
+});
+
+// ===== KATANA SVG GENERATOR (v2 — bentuk + sarung unik per pedang) =====
+function makeKatanaSVG(cfg) {
+  const c = Object.assign({
+    blade: '#C8D0DA', edge: '#FFFFFF', hamonColor: '#8AA0B0', hamonStyle: 'wave',
+    handle: '#2A1F1A', wrap: '#8B1A1A', tsuba: '#C8A84B', tsubaShape: 'round',
+    glow: null, bladeLen: 300, curve: 14, width: 11, sayaColor: '#1A1410',
+    sayaAccent: '#C8A84B', sayaPattern: 'plain', kojiri: '#C8A84B'
+  }, cfg);
+
+  const x0 = 150; // tsuba x position, blade starts here
+  const xEnd = x0 + c.bladeLen;
+  const w = c.width;
+  const curve = c.curve;
+
+  // blade: curved katana shape using quadratic path (back/mune curves up, edge curves down)
+  const bladePath = `
+    M ${x0} ${50 - w/2}
+    Q ${x0 + c.bladeLen*0.5} ${50 - w/2 - curve} ${xEnd} ${50 - curve}
+    L ${xEnd + 16} ${50 - curve + 6}
+    L ${xEnd} ${50 - curve + 12}
+    Q ${x0 + c.bladeLen*0.5} ${50 + w/2 - curve} ${x0} ${50 + w/2}
+    Z`;
+
+  const hamonPath = c.hamonStyle === 'flame'
+    ? `M ${x0+10} ${50-2} Q ${x0+50} ${50-10-curve*0.3} ${x0+90} ${50-3-curve*0.4} Q ${x0+130} ${50+4-curve*0.6} ${x0+170} ${50-6-curve*0.7} Q ${x0+210} ${50-curve*0.85} ${xEnd-10} ${50-2-curve}`
+    : c.hamonStyle === 'straight'
+    ? `M ${x0+10} ${50} L ${xEnd-10} ${50-curve}`
+    : `M ${x0+10} ${50-1} Q ${x0+70} ${50+5-curve*0.3} ${x0+130} ${50-4-curve*0.5} Q ${x0+190} ${50-curve*0.7} ${xEnd-10} ${50-1-curve}`;
+
+  const glowDef = c.glow ? `
+    <defs>
+      <filter id="glow-${c._key||''}" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>` : '';
+
+  // Tsuba shapes
+  let tsubaShape;
+  if (c.tsubaShape === 'square') {
+    tsubaShape = `<rect x="${x0-9}" y="38" width="18" height="24" rx="2" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1.5"/>`;
+  } else if (c.tsubaShape === 'flower') {
+    tsubaShape = `
+      <circle cx="${x0}" cy="50" r="6" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1.2"/>
+      <circle cx="${x0}" cy="38" r="4.5" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1"/>
+      <circle cx="${x0}" cy="62" r="4.5" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1"/>
+      <circle cx="${x0-7}" cy="44" r="3.5" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1"/>
+      <circle cx="${x0+7}" cy="44" r="3.5" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1"/>
+      <circle cx="${x0-7}" cy="56" r="3.5" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1"/>
+      <circle cx="${x0+7}" cy="56" r="3.5" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1"/>`;
+  } else if (c.tsubaShape === 'cross') {
+    tsubaShape = `
+      <ellipse cx="${x0}" cy="50" rx="9" ry="15" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1.5"/>
+      <line x1="${x0}" y1="37" x2="${x0}" y2="63" stroke="${c.tsuba}" stroke-width="1.5"/>
+      <line x1="${x0-7}" y1="50" x2="${x0+7}" y2="50" stroke="${c.tsuba}" stroke-width="1.5"/>`;
+  } else {
+    tsubaShape = `<ellipse cx="${x0}" cy="50" rx="8" ry="15" fill="#1A1A24" stroke="${c.tsuba}" stroke-width="1.5"/>`;
+  }
+
+  // Saya (sheath) pattern
+  let sayaDeco = '';
+  if (c.sayaPattern === 'stripes') {
+    sayaDeco = [0,1,2,3,4].map(i => `<line x1="${10+i*20}" y1="40" x2="${10+i*20}" y2="62" stroke="${c.sayaAccent}" stroke-width="1.5" opacity="0.5"/>`).join('');
+  } else if (c.sayaPattern === 'diamond') {
+    sayaDeco = [0,1,2].map(i => `<path d="M ${20+i*35} 51 L ${30+i*35} 42 L ${40+i*35} 51 L ${30+i*35} 60 Z" fill="none" stroke="${c.sayaAccent}" stroke-width="1" opacity="0.55"/>`).join('');
+  } else if (c.sayaPattern === 'flame') {
+    sayaDeco = `<path d="M 12 51 Q 30 40 48 51 Q 66 60 84 51 Q 102 42 120 51" fill="none" stroke="${c.sayaAccent}" stroke-width="1.2" opacity="0.55"/>`;
+  } else if (c.sayaPattern === 'crack') {
+    sayaDeco = `<path d="M 15 42 L 30 51 L 22 60 M 50 44 L 65 51 L 58 58 M 90 42 L 105 51 L 98 60" fill="none" stroke="${c.sayaAccent}" stroke-width="1" opacity="0.5"/>`;
+  }
+
+  return `
+  <svg viewBox="0 0 540 110" xmlns="http://www.w3.org/2000/svg">
+    ${glowDef}
+    <!-- SAYA (sheath) on the left -->
+    <g>
+      <rect x="6" y="40" width="138" height="20" rx="9" fill="${c.sayaColor}" stroke="${c.sayaAccent}" stroke-width="1"/>
+      ${sayaDeco}
+      <rect x="100" y="38" width="10" height="24" rx="2" fill="#0A0A0F" stroke="${c.sayaAccent}" stroke-width="1"/>
+      <ellipse cx="10" cy="50" rx="5" ry="10" fill="${c.kojiri}" opacity="0.9"/>
+    </g>
+    <g ${c.glow ? `filter="url(#glow-${c._key||''})"` : ''}>
+      <!-- blade -->
+      <path d="${bladePath}" fill="${c.blade}" stroke="${c.edge}" stroke-width="1" opacity="0.96"/>
+      <!-- hamon -->
+      <path d="${hamonPath}" fill="none" stroke="${c.hamonColor}" stroke-width="1" opacity="0.6" stroke-dasharray="3,2"/>
+    </g>
+    <!-- habaki -->
+    <rect x="${x0-5}" y="${50-w/2-1}" width="9" height="${w+2}" fill="#3A3A4A" stroke="${c.tsuba}" stroke-width="0.8"/>
+    <!-- tsuba -->
+    ${tsubaShape}
+    <!-- handle -->
+    <rect x="20" y="44" width="56" height="12" rx="2" fill="${c.handle}" stroke="${c.tsuba}" stroke-width="0.8"/>
+    <line x1="28" y1="44" x2="28" y2="56" stroke="${c.wrap}" stroke-width="2" opacity="0.75"/>
+    <line x1="38" y1="44" x2="38" y2="56" stroke="${c.wrap}" stroke-width="2" opacity="0.75"/>
+    <line x1="48" y1="44" x2="48" y2="56" stroke="${c.wrap}" stroke-width="2" opacity="0.75"/>
+    <line x1="58" y1="44" x2="58" y2="56" stroke="${c.wrap}" stroke-width="2" opacity="0.75"/>
+    <line x1="68" y1="44" x2="68" y2="56" stroke="${c.wrap}" stroke-width="2" opacity="0.75"/>
+    <!-- pommel -->
+    <rect x="15" y="43" width="7" height="14" rx="2" fill="#4A4A5A" stroke="${c.tsuba}" stroke-width="0.8"/>
+  </svg>`;
+}
+
+const swordConfigs = {
+  // ===== KOLEKSI DUNIA NYATA — masing-masing punya kelengkungan, tsuba, dan saya berbeda =====
+  honjo: {
+    blade: '#D8DEE6', hamonColor: '#A8B8C8', hamonStyle: 'wave',
+    handle: '#241812', wrap: '#5A1010', tsuba: '#C8A84B', tsubaShape: 'flower',
+    curve: 16, width: 11, bladeLen: 300,
+    sayaColor: '#1C1208', sayaAccent: '#C8A84B', sayaPattern: 'plain', kojiri: '#C8A84B'
+  },
+  dojigiri: {
+    blade: '#CFD7E0', hamonColor: '#9AAAB8', hamonStyle: 'wave',
+    handle: '#1E1A14', wrap: '#7A2020', tsuba: '#B89642', tsubaShape: 'round',
+    curve: 20, width: 12, bladeLen: 310,
+    sayaColor: '#2A1A0E', sayaAccent: '#B89642', sayaPattern: 'stripes', kojiri: '#B89642'
+  },
+  muramasa: {
+    blade: '#C8D0DA', hamonColor: '#D0203A', hamonStyle: 'flame',
+    handle: '#150E0B', wrap: '#8B1A1A', tsuba: '#6A6A78', tsubaShape: 'cross',
+    curve: 10, width: 9, bladeLen: 310, glow: 'maroon', _key: 'mur',
+    sayaColor: '#150A0A', sayaAccent: '#8B1A1A', sayaPattern: 'crack', kojiri: '#8B1A1A'
+  },
+  kogarasu: {
+    blade: '#D2DAE2', hamonColor: '#A0AEBE', hamonStyle: 'straight',
+    handle: '#2A1F1A', wrap: '#3A2A6A', tsuba: '#C8A84B', tsubaShape: 'square',
+    curve: 4, width: 14, bladeLen: 260,
+    sayaColor: '#161616', sayaAccent: '#C8A84B', sayaPattern: 'diamond', kojiri: '#C8A84B'
+  },
+  fudo: {
+    blade: '#D6DCE4', hamonColor: '#C8A84B', hamonStyle: 'flame',
+    handle: '#1A1410', wrap: '#8B1A1A', tsuba: '#C8A84B', tsubaShape: 'flower',
+    curve: 6, width: 10, bladeLen: 175,
+    sayaColor: '#1A1410', sayaAccent: '#8B1A1A', sayaPattern: 'flame', kojiri: '#8B1A1A'
+  },
+  kusanagi: {
+    blade: '#E8EEF2', hamonColor: '#7DC8E8', hamonStyle: 'straight',
+    handle: '#0E0E14', wrap: '#C8A84B', tsuba: '#E8E0D0', tsubaShape: 'round',
+    curve: 2, width: 13, bladeLen: 290, glow: 'gold', _key: 'kus',
+    sayaColor: '#0E0E18', sayaAccent: '#7DC8E8', sayaPattern: 'plain', kojiri: '#E8E0D0'
+  },
+  // ===== DUNIA ANIME — bentuk generik, dibedakan dari struktur & sarung, bukan reproduksi desain spesifik =====
+  'nichirin-black': {
+    blade: '#1A1A22', edge: '#3A3A48', hamonColor: '#0A0A0F', hamonStyle: 'flame',
+    handle: '#1A1410', wrap: '#2A2A32', tsuba: '#6A6A78', tsubaShape: 'round',
+    curve: 18, width: 12, bladeLen: 290,
+    sayaColor: '#0A0A0E', sayaAccent: '#3A3A48', sayaPattern: 'crack', kojiri: '#3A3A48'
+  },
+  'nichirin-yellow': {
+    blade: '#F0D060', edge: '#FFF4C0', hamonColor: '#FFE070', hamonStyle: 'flame',
+    handle: '#1A1410', wrap: '#3A3A22', tsuba: '#C8A84B', tsubaShape: 'flower',
+    curve: 22, width: 10, bladeLen: 280, glow: 'gold', _key: 'nicy',
+    sayaColor: '#241F0A', sayaAccent: '#F0D060', sayaPattern: 'flame', kojiri: '#F0D060'
+  },
+  'nichirin-red': {
+    blade: '#E85A3A', edge: '#FFB080', hamonColor: '#FF8050', hamonStyle: 'flame',
+    handle: '#1A1410', wrap: '#5A1A10', tsuba: '#C8A84B', tsubaShape: 'flower',
+    curve: 14, width: 13, bladeLen: 300, glow: 'maroon', _key: 'nicr',
+    sayaColor: '#2A1208', sayaAccent: '#E85A3A', sayaPattern: 'flame', kojiri: '#E85A3A'
+  },
+  wado: {
+    blade: '#E8E8EE', edge: '#FFFFFF', hamonColor: '#C8A84B', hamonStyle: 'wave',
+    handle: '#E8E0D0', wrap: '#2A4A8A', tsuba: '#C8A84B', tsubaShape: 'round',
+    curve: 16, width: 10, bladeLen: 290,
+    sayaColor: '#F2EEE2', sayaAccent: '#2A4A8A', sayaPattern: 'stripes', kojiri: '#2A4A8A'
+  },
+  yoru: {
+    blade: '#0A0A10', edge: '#2A2A38', hamonColor: '#000000', hamonStyle: 'straight',
+    handle: '#0A0A0A', wrap: '#1A1A1A', tsuba: '#3A3A48', tsubaShape: 'cross',
+    curve: 6, width: 16, bladeLen: 330, glow: 'black', _key: 'yoru',
+    sayaColor: '#050505', sayaAccent: '#3A3A48', sayaPattern: 'plain', kojiri: '#3A3A48'
+  },
+  zangetsu: {
+    blade: '#2A2A36', edge: '#5A5A6A', hamonColor: '#1A1A24', hamonStyle: 'flame',
+    handle: '#1A1414', wrap: '#3A3A44', tsuba: '#6A6A78', tsubaShape: 'square',
+    curve: 4, width: 9, bladeLen: 320,
+    sayaColor: '#16161A', sayaAccent: '#6A6A78', sayaPattern: 'crack', kojiri: '#6A6A78'
+  },
+  senbonzakura: {
+    blade: '#D8DEE6', edge: '#FFD0E0', hamonColor: '#E8A0C0', hamonStyle: 'flame',
+    handle: '#1A1414', wrap: '#7A3A5A', tsuba: '#C8A84B', tsubaShape: 'flower',
+    curve: 20, width: 9, bladeLen: 270, glow: 'pink', _key: 'senbon',
+    sayaColor: '#1C1218', sayaAccent: '#E8A0C0', sayaPattern: 'diamond', kojiri: '#E8A0C0'
+  },
+  sakabato: {
+    blade: '#C8D0DA', edge: '#E8E0D0', hamonColor: '#A8B8C8', hamonStyle: 'straight',
+    handle: '#3A2A1A', wrap: '#6A5A2A', tsuba: '#8A6F2A', tsubaShape: 'round',
+    curve: 16, width: 11, bladeLen: 290,
+    sayaColor: '#2E2010', sayaAccent: '#8A6F2A', sayaPattern: 'stripes', kojiri: '#8A6F2A'
+  }
+};
+
+const swordLabels = {
+  honjo: 'Honjo Masamune', dojigiri: 'Dōjigiri Yasutsuna', muramasa: 'Pedang Muramasa',
+  kogarasu: 'Kogarasu Maru', fudo: 'Fudo Masamune', kusanagi: 'Kusanagi-no-Tsurugi',
+  'nichirin-black': 'Nichirin Blade — Hitam', 'nichirin-yellow': 'Nichirin Blade — Kuning',
+  'nichirin-red': 'Nichirin Blade — Merah', wado: 'Wado Ichimonji', yoru: 'Yoru',
+  zangetsu: 'Zangetsu', senbonzakura: 'Senbonzakura', sakabato: 'Sakabatō Meiji'
+};
+
+// pre-render cache
+const svgCache = {};
+function getSwordSVG(key) {
+  if (!svgCache[key]) {
+    const cfg = swordConfigs[key];
+    svgCache[key] = cfg ? makeKatanaSVG(cfg) : '';
+  }
+  return svgCache[key];
+}
+
+const tooltipEl = document.getElementById('katanaTooltip');
+let tooltipActiveTrigger = null;
+
+function positionTooltip(trigger) {
+  const rect = trigger.getBoundingClientRect();
+  // measure actual rendered width (responsive via CSS min())
+  const tw = tooltipEl.offsetWidth || Math.min(320, window.innerWidth - 24);
+  let left = rect.left + rect.width / 2 - tw / 2;
+  left = Math.max(12, Math.min(left, window.innerWidth - tw - 12));
+  let top = rect.top - 200;
+  if (top < 12) top = rect.bottom + 10;
+  if (top + 200 > window.innerHeight) top = Math.max(12, window.innerHeight - 210);
+  tooltipEl.style.left = left + 'px';
+  tooltipEl.style.top = top + 'px';
+}
+
+function showTooltip(trigger) {
+  const key = trigger.dataset.sword;
+  const svg = getSwordSVG(key);
+  if (!svg) return;
+  tooltipEl.innerHTML = svg + `<p class="katana-tooltip-label">${swordLabels[key] || ''}</p>`;
+  positionTooltip(trigger);
+  tooltipEl.classList.add('show');
+  tooltipActiveTrigger = trigger;
+}
+
+function hideTooltip() {
+  tooltipEl.classList.remove('show');
+  tooltipActiveTrigger = null;
+}
+
+document.querySelectorAll('.sword-trigger').forEach(el => {
+  el.addEventListener('mouseenter', () => showTooltip(el));
+  el.addEventListener('mouseleave', hideTooltip);
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (tooltipActiveTrigger === el) { hideTooltip(); }
+    else { showTooltip(el); }
+  });
+});
+
+document.addEventListener('scroll', () => {
+  if (tooltipActiveTrigger) positionTooltip(tooltipActiveTrigger);
+}, { passive: true });
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.sword-trigger')) hideTooltip();
+});
+
+</script>
+
+</body>
+</html>
